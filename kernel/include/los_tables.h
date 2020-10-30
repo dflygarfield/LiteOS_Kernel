@@ -1,6 +1,6 @@
-/*----------------------------------------------------------------------------
- * Copyright (c) <2013-2015>, <Huawei Technologies Co., Ltd>
- * All rights reserved.
+/* ----------------------------------------------------------------------------
+ * Copyright (c) Huawei Technologies Co., Ltd. 2013-2019. All rights reserved.
+ * Description: Tables
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 1. Redistributions of source code must retain the above copyright notice, this list of
@@ -22,119 +22,131 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *---------------------------------------------------------------------------*/
-/*----------------------------------------------------------------------------
+ * --------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------
  * Notice of Export Control Law
  * ===============================================
  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
  * applicable export control laws and regulations.
- *---------------------------------------------------------------------------*/
+ * --------------------------------------------------------------------------- */
+
+#ifndef _LOS_TABLES_H
+#define _LOS_TABLES_H
 
 #include "los_typedef.h"
 
-#define __string(_x) #_x
-#define __xstring(_x) __string(_x)
+#ifdef __cplusplus
+#if __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+#endif /* __cplusplus */
 
 #ifndef LOS_HAL_TABLE_WOW_BEGIN
-#define LOS_HAL_TABLE_WOW_BEGIN( _label, _name )                                 \
-__asm__(".section \".liteos.table." __xstring(_name) ".wow.begin\",\"aw\"\n"       \
-    ".globl " __xstring(LOS_LABEL_DEFN(_label)) "\n"                         \
-    ".type    " __xstring(LOS_LABEL_DEFN(_label)) ",object\n"                \
-    ".p2align " __xstring(LOSARC_P2ALIGNMENT) "\n"                           \
-__xstring(LOS_LABEL_DEFN(_label)) ":\n"                                      \
-    ".previous\n"                                                            \
-       )
+#define LOS_HAL_TABLE_WOW_BEGIN(label, name)                                     \
+    __asm__(".section \".liteos.table." X_STRING(name) ".wow.begin\",\"aw\"\n"   \
+            ".globl " X_STRING(LOS_LABEL_DEFN(label)) "\n"                       \
+            ".type    " X_STRING(LOS_LABEL_DEFN(label)) ",object\n"              \
+            ".p2align " X_STRING(LOSARC_P2ALIGNMENT) "\n"                        \
+            X_STRING(LOS_LABEL_DEFN(label)) ":\n"                                \
+            ".previous\n"                                                        \
+            )
 #endif
 
 #ifndef LOS_HAL_TABLE_WOW_END
-#define LOS_HAL_TABLE_WOW_END( _label, _name )                                   \
-__asm__(".section \".liteos.table." __xstring(_name) ".wow.finish\",\"aw\"\n"      \
-    ".globl " __xstring(LOS_LABEL_DEFN(_label)) "\n"                         \
-    ".type    " __xstring(LOS_LABEL_DEFN(_label)) ",object\n"                \
-    ".p2align " __xstring(LOSARC_P2ALIGNMENT) "\n"                           \
-__xstring(LOS_LABEL_DEFN(_label)) ":\n"                                      \
-    ".previous\n"                                                            \
-       )
+#define LOS_HAL_TABLE_WOW_END(label, name)                                       \
+    __asm__(".section \".liteos.table." X_STRING(name) ".wow.finish\",\"aw\"\n"  \
+            ".globl " X_STRING(LOS_LABEL_DEFN(label)) "\n"                       \
+            ".type    " X_STRING(LOS_LABEL_DEFN(label)) ",object\n"              \
+            ".p2align " X_STRING(LOSARC_P2ALIGNMENT) "\n"                        \
+            X_STRING(LOS_LABEL_DEFN(label)) ":\n"                                \
+            ".previous\n"                                                        \
+            )
 #endif
 
 #ifndef LOS_HAL_TABLE_SCATTER_BEGIN
-#define LOS_HAL_TABLE_SCATTER_BEGIN( _label, _name )                                 \
-__asm__(".section \".liteos.table." __xstring(_name) ".scatter.begin\",\"aw\"\n"       \
-    ".globl " __xstring(LOS_LABEL_DEFN(_label)) "\n"                         \
-    ".type    " __xstring(LOS_LABEL_DEFN(_label)) ",object\n"                \
-    ".p2align " __xstring(LOSARC_P2ALIGNMENT) "\n"                           \
-__xstring(LOS_LABEL_DEFN(_label)) ":\n"                                      \
-    ".previous\n"                                                            \
-       )
+#define LOS_HAL_TABLE_SCATTER_BEGIN(label, name)                                    \
+    __asm__(".section \".liteos.table." X_STRING(name) ".scatter.begin\",\"aw\"\n"  \
+            ".globl " X_STRING(LOS_LABEL_DEFN(label)) "\n"                          \
+            ".type    " X_STRING(LOS_LABEL_DEFN(label)) ",object\n"                 \
+            ".p2align " X_STRING(LOSARC_P2ALIGNMENT) "\n"                           \
+            X_STRING(LOS_LABEL_DEFN(label)) ":\n"                                   \
+            ".previous\n"                                                           \
+            )
 #endif
 
 #ifndef LOS_HAL_TABLE_SCATTER_END
-#define LOS_HAL_TABLE_SCATTER_END( _label, _name )                                   \
-__asm__(".section \".liteos.table." __xstring(_name) ".scatter.finish\",\"aw\"\n"      \
-    ".globl " __xstring(LOS_LABEL_DEFN(_label)) "\n"                         \
-    ".type    " __xstring(LOS_LABEL_DEFN(_label)) ",object\n"                \
-    ".p2align " __xstring(LOSARC_P2ALIGNMENT) "\n"                           \
-__xstring(LOS_LABEL_DEFN(_label)) ":\n"                                      \
-    ".previous\n"                                                            \
-       )
+#define LOS_HAL_TABLE_SCATTER_END(label, name)                                      \
+    __asm__(".section \".liteos.table." X_STRING(name) ".scatter.finish\",\"aw\"\n" \
+            ".globl " X_STRING(LOS_LABEL_DEFN(label)) "\n"                          \
+            ".type    " X_STRING(LOS_LABEL_DEFN(label)) ",object\n"                 \
+            ".p2align " X_STRING(LOSARC_P2ALIGNMENT) "\n"                           \
+            X_STRING(LOS_LABEL_DEFN(label)) ":\n"                                   \
+            ".previous\n"                                                           \
+            )
 #endif
 
 #ifndef LOS_HAL_TABLE_BEGIN
-#define LOS_HAL_TABLE_BEGIN( _label, _name )                                 \
-__asm__(".section \".liteos.table." __xstring(_name) ".begin\",\"aw\"\n"       \
-    ".globl " __xstring(LOS_LABEL_DEFN(_label)) "\n"                         \
-    ".type    " __xstring(LOS_LABEL_DEFN(_label)) ",object\n"                \
-    ".p2align " __xstring(LOSARC_P2ALIGNMENT) "\n"                           \
-__xstring(LOS_LABEL_DEFN(_label)) ":\n"                                      \
-    ".previous\n"                                                            \
-       )
+#define LOS_HAL_TABLE_BEGIN(label, name)                                     \
+    __asm__(".section \".liteos.table." X_STRING(name) ".begin\",\"aw\"\n"   \
+            ".globl " X_STRING(LOS_LABEL_DEFN(label)) "\n"                   \
+            ".type    " X_STRING(LOS_LABEL_DEFN(label)) ",object\n"          \
+            ".p2align " X_STRING(LOSARC_P2ALIGNMENT) "\n"                    \
+            X_STRING(LOS_LABEL_DEFN(label)) ":\n"                            \
+            ".previous\n"                                                    \
+            )
 #endif
 
 #ifndef LOS_HAL_TABLE_END
-#define LOS_HAL_TABLE_END( _label, _name )                                   \
-__asm__(".section \".liteos.table." __xstring(_name) ".finish\",\"aw\"\n"      \
-    ".globl " __xstring(LOS_LABEL_DEFN(_label)) "\n"                         \
-    ".type    " __xstring(LOS_LABEL_DEFN(_label)) ",object\n"                \
-    ".p2align " __xstring(LOSARC_P2ALIGNMENT) "\n"                           \
-__xstring(LOS_LABEL_DEFN(_label)) ":\n"                                      \
-    ".previous\n"                                                            \
-       )
+#define LOS_HAL_TABLE_END(label, name)                                       \
+    __asm__(".section \".liteos.table." X_STRING(name) ".finish\",\"aw\"\n"  \
+            ".globl " X_STRING(LOS_LABEL_DEFN(label)) "\n"                   \
+            ".type    " X_STRING(LOS_LABEL_DEFN(label)) ",object\n"          \
+            ".p2align " X_STRING(LOSARC_P2ALIGNMENT) "\n"                    \
+            X_STRING(LOS_LABEL_DEFN(label)) ":\n"                            \
+            ".previous\n"                                                    \
+            )
 #endif
 
-// This macro must be applied to any types whose objects are to be placed in
-// tables
+/* This macro must be applied to any types whose objects are to be placed in tables */
 #ifndef LOS_HAL_TABLE_TYPE
-#define LOS_HAL_TABLE_TYPE LOSBLD_ATTRIB_ALIGN( LOSARC_ALIGNMENT )
+#define LOS_HAL_TABLE_TYPE LOSBLD_ATTRIB_ALIGN(LOSARC_ALIGNMENT)
 #endif
 
 #ifndef LOS_HAL_TABLE_EXTRA
-#define LOS_HAL_TABLE_EXTRA( _name ) \
-        LOSBLD_ATTRIB_SECTION(".liteos.table." __xstring(_name) ".extra")
+#define LOS_HAL_TABLE_EXTRA(name) \
+    LOSBLD_ATTRIB_SECTION(".liteos.table." X_STRING(name) ".extra")
 #endif
 
 #ifndef LOS_HAL_TABLE_WOW_ENTRY
-#define LOS_HAL_TABLE_WOW_ENTRY( _name ) \
-        LOSBLD_ATTRIB_SECTION(".liteos.table." __xstring(_name) ".wow.data") \
-        LOSBLD_ATTRIB_USED
+#define LOS_HAL_TABLE_WOW_ENTRY(name)                                  \
+    LOSBLD_ATTRIB_SECTION(".liteos.table." X_STRING(name) ".wow.data") \
+    LOSBLD_ATTRIB_USED
 #endif
 
 #ifndef LOS_HAL_TABLE_SCATTER_ENTRY
-#define LOS_HAL_TABLE_SCATTER_ENTRY( _name ) \
-        LOSBLD_ATTRIB_SECTION(".liteos.table." __xstring(_name) ".scatter.data") \
-        LOSBLD_ATTRIB_USED
+#define LOS_HAL_TABLE_SCATTER_ENTRY(name)                                  \
+    LOSBLD_ATTRIB_SECTION(".liteos.table." X_STRING(name) ".scatter.data") \
+    LOSBLD_ATTRIB_USED
 #endif
 
 #ifndef LOS_HAL_TABLE_ENTRY
-#define LOS_HAL_TABLE_ENTRY( _name ) \
-        LOSBLD_ATTRIB_SECTION(".liteos.table." __xstring(_name) ".data") \
-        LOSBLD_ATTRIB_USED
+#define LOS_HAL_TABLE_ENTRY(name)                                  \
+    LOSBLD_ATTRIB_SECTION(".liteos.table." X_STRING(name) ".data") \
+    LOSBLD_ATTRIB_USED
 #endif
 
 #ifndef LOS_HAL_TABLE_QUALIFIED_ENTRY
-#define LOS_HAL_TABLE_QUALIFIED_ENTRY( _name, _qual ) \
-        LOSBLD_ATTRIB_SECTION(".liteos.table." __xstring(_name) ".data." \
-                              __xstring(_qual))                        \
-        LOSBLD_ATTRIB_USED
+#define LOS_HAL_TABLE_QUALIFIED_ENTRY(name, _qual)                                  \
+    LOSBLD_ATTRIB_SECTION(".liteos.table." X_STRING(name) ".data." X_STRING(_qual)) \
+    LOSBLD_ATTRIB_USED
 #endif
+
+#ifdef __cplusplus
+#if __cplusplus
+}
+#endif /* __cplusplus */
+#endif /* __cplusplus */
+
+#endif /* _LOS_TABLES_H */
